@@ -25,21 +25,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/empresa": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/empresa.js"
-    ],
-    "/telecomunicacoes": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/telecomunicacoes.js"
-    ],
-    "/transporte": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/transporte.js"
-    ],
     "/tvde": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
