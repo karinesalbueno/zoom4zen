@@ -35,6 +35,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/telecomunicacoes.js"
     ],
+    "/transporte": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/transporte.js"
+    ],
     "/tvde": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

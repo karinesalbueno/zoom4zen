@@ -4,5 +4,6 @@
   "/_document": "pages/_document.js",
   "/tvde": "pages/tvde.js",
   "/telecomunicacoes": "pages/telecomunicacoes.js",
-  "/empresa": "pages/empresa.js"
+  "/empresa": "pages/empresa.js",
+  "/transporte": "pages/transporte.js"
 }
