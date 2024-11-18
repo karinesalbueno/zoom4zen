@@ -1,7 +1,7 @@
 import { FaWhatsapp } from 'react-icons/fa';
 
 export default function WhatsAppButton() {
-    const whatsappNumber = '550878787909';
+    const whatsappNumber = '5578787909';
     const message = encodeURIComponent('Oi, gostaria de mais informações sobre a zoom4zen');
     
     const handleClick = () => {

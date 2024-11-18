@@ -151,24 +151,24 @@ export default function Cadastro({ rota }) {
                     <form onSubmit={handleSubmit}>
                         {/* <h2 className="text-xl mb-4 text-center">Formulário de Cadastro</h2> */}
                         <div className="mb-4">
-                            <label className="block ">Nome</label>
+                            <label className="block">Nome</label>
                             <input
                                 type="text"
                                 name="nome"
                                 value={formData.nome}
                                 onChange={handleFormChange}
-                                className="w-full p-2 border rounded"
+                                className="w-full p-2 border rounded text-black"
                                 required
                             />
                         </div>
                         <div className="mb-4">
                             <label className="block ">Telefone</label>
                             <input
-                                type="number"
+                                type="text"
                                 name="telefone"
                                 value={formData.telefone}
                                 onChange={handleFormChange}
-                                className="w-full p-2 border rounded"
+                                className="w-full p-2 border rounded text-black"
                                 required
                             />
                         </div>
@@ -179,7 +179,7 @@ export default function Cadastro({ rota }) {
                                 name="email"
                                 value={formData.email}
                                 onChange={handleFormChange}
-                                className="w-full p-2 border rounded"
+                                className="w-full p-2 border rounded text-black"
                                 required
                             />
                         </div>
@@ -190,7 +190,7 @@ export default function Cadastro({ rota }) {
                                 name="endereco"
                                 value={formData.endereco}
                                 onChange={handleFormChange}
-                                className="w-full p-2 border rounded"
+                                className="w-full p-2 border rounded text-black"
                             />
                         </div>
 
