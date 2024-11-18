@@ -1,16 +1,82 @@
-import Link from 'next/link';
+import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+import Menu from "./Menu"; 
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  // Fechar o menu ao clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Fechar o menu ao redimensionar para desktop
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <header className="w-full bg-blue-600 text-white py-4">
-      <nav className="container mx-auto flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Meu Site</h1>
-        <ul className="flex space-x-4">
-          <li><Link href="/">Home</Link></li>
-          <li><Link href="/sobre">Sobre</Link></li>
-          <li><a href="#" className="hover:underline">Contato</a></li>
-        </ul>
-      </nav>
+    <header className="bg-white text-gray-800 fixed w-full top-0 left-0 z-50 shadow-md shadow-gray-400">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+
+        <div className="w-28 h-8">
+          <a href="/">
+            <Image
+              src="/images/logo.png"
+              alt="Imagem"
+              width={170}
+              height={60}
+              className="rounded-lg"
+            />
+          </a>
+        </div>
+
+        {/* Menu de navegação para desktop */}
+        <nav className="hidden md:flex space-x-8 lg:pr-32">
+          <Menu />
+        </nav>
+
+        {/* Menu responsivo (mobile) */}
+        <div className="md:hidden">
+          <button className="text-gray-800" onClick={toggleMenu}>
+            ☰
+          </button>
+        </div>
+      </div>
+
+      {isMenuOpen && (
+        <div
+          className="bg-white shadow-md w-full top-0 left-0 z-40 py-8"
+          ref={menuRef}
+        >
+          <div className="flex flex-col justify-start h-full">
+            <Menu />
+          </div>
+        </div>
+      )}
     </header>
   );
 }
