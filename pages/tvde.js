@@ -9,7 +9,7 @@ export default function Tvde() {
         <p className="text-lg text-gray-700 mt-2">
           Oferecemos veículos ideais para motoristas que desejam atuar no transporte de passageiros (TVDE). Nossa frota é composta por carros seguros, confortáveis e econômicos para garantir uma experiência de qualidade tanto para motoristas quanto para passageiros.
         </p>
-        <Cadastro />
+        <Cadastro rota={'tvde'} />
       </div>
     </Layout>
   );

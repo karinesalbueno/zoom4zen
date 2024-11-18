@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { nome, telefone, email, endereco, possui_carro } = req.body;
 
-    if (!nome || !telefone || !email || !endereco || possui_carro === undefined) {
+    if (!nome || !telefone || !email || possui_carro === undefined) {
       return res.status(400).json({ error: 'Todos os campos são obrigatórios.' });
     }
 

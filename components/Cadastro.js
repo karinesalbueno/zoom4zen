@@ -1,16 +1,25 @@
 import { useState } from 'react';
 
-export default function Cadastro() {
+export default function Cadastro({ rota }) {
+    const [etapa, setEtapa] = useState(1); // Inicializa na primeira etapa
     const [possuiCarro, setPossuiCarro] = useState(null);
+    const [temExperiencia, setTemExperiencia] = useState(null);
     const [formData, setFormData] = useState({
         nome: '',
         telefone: '',
         email: '',
         endereco: '',
     });
-    const [errorMessage, setErrorMessage] = useState(''); 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const handlePossuiCarroChange = (answer) => {
         setPossuiCarro(answer);
+        setEtapa(2); // Vai para a próxima etapa após escolher uma opção
+    };
+
+    const handleTemExperienciaChange = (answer) => {
+        setTemExperiencia(answer);
+        setEtapa(3); // Vai para a próxima etapa após escolher uma opção
     };
 
     const handleFormChange = (e) => {
@@ -24,10 +33,18 @@ export default function Cadastro() {
         const dataToSubmit = {
             ...formData,
             possui_carro: possuiCarro,
+            ...(rota === 'telecomunicacoes' && { experiencia: temExperiencia }), // Só inclui a experiência se a tela for telecomunicações
         };
 
+        let apiUrl;
+        if (rota === 'telecomunicacoes') {
+            apiUrl = '/api/cadastroTelecomunicacoes';
+        } else {
+            apiUrl = '/api/cadastroTVDE';
+        }
+
         try {
-            const response = await fetch('/api/cadastroTVDE', {
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -40,22 +57,46 @@ export default function Cadastro() {
             if (response.ok) {
                 alert(result.message);
                 setFormData({ nome: '', telefone: '', email: '', endereco: '' });
-                setErrorMessage(''); // Limpar a mensagem de erro, se houver
+                setErrorMessage('');
             } else {
-                setErrorMessage(result.error); // Exibe a mensagem de erro recebida da API
+                setErrorMessage(result.error);
             }
         } catch (error) {
-            setErrorMessage('Erro ao enviar o formulário.'); 
+            setErrorMessage('Erro ao enviar o formulário.');
         }
     };
 
     return (
-        <div className="p-6 max-w-lg mx-auto pt-14 justify-items-center">
-            <h2 className="text-md mb-4 text-gray-700 font-medium">Formulário de Cadastro</h2>
+        <div className="p-6 max-w-lg mx-auto pt-14">
+            <h2 className="text-md mb-4 text-gray-700 font-medium text-center">Formulário de Cadastro</h2>
+            {/* Botão de Voltar para a etapa anterior */}
+            {etapa > 1 && <div className="mb-4 mt-6">
+                <button
+                    onClick={() => setEtapa(etapa - 1)} // Volta para a etapa 1
+                    className="text-blue-500 text-base font-semibold inline-flex items-center mt-2"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 mr-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M15 19l-7-7 7-7"
+                        />
+                    </svg>
+                    Voltar
+                </button>
+            </div>}
 
-            {possuiCarro === null ? (
+
+            {etapa === 1 && (
                 // Etapa 1: Pergunta "Possui carro?"
-                <div>
+                <div className='text-center pt-16'>
                     <h2 className="text-xl mb-4 text-center">Você possui carro?</h2>
                     <button
                         onClick={() => handlePossuiCarroChange(true)}
@@ -70,40 +111,45 @@ export default function Cadastro() {
                         Não
                     </button>
                 </div>
-            ) : (
-                // Etapa 2: Formulário para preencher informações
-                <div>
-                    <div className="mb-4">
-                        {/* Botão de Voltar */}
-                        <button
-                            onClick={() => setPossuiCarro(null)}
-                            className="text-blue-500 text-lg font-semibold inline-flex items-center mt-2"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6 mr-2"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M15 19l-7-7 7-7"
-                                />
-                            </svg>
-                            Voltar
-                        </button>
-                        {/* Indicativo da opção marcada */}
+            )}
+
+            {etapa === 2 && (
+                // Etapa 2: Pergunta sobre experiência
+                <div className='text-center'>
+                    <h2 className="text-xl mb-4 text-center">Você tem experiência na área?</h2>
+                    <button
+                        onClick={() => handleTemExperienciaChange(true)}
+                        className="bg-blue-500 text-white py-2 px-8 rounded mr-4"
+                    >
+                        Sim
+                    </button>
+                    <button
+                        onClick={() => handleTemExperienciaChange(false)}
+                        className="bg-gray-500 text-white py-2 px-8 rounded"
+                    >
+                        Não
+                    </button>
+
+                </div>
+            )}
+
+            {etapa === 3 && (
+                // Etapa 3: Formulário de Cadastro
+                <div className='px-2'>
+                    {/* Indicativo da opção marcada */}
+                    <div className='pb-4'>
                         <p className="text-base ">
-                            {possuiCarro ?
-                                <span className=''>Possui carro? Sim.</span>
-                                :
-                                <span>Possui carro? Não.</span>}
+                            {possuiCarro ? 'Possui carro? Sim.' : 'Possui carro? Não.'}
                         </p>
+                        {rota === 'telecomunicacoes' && temExperiencia !== null && (
+                            <p className="text-base ">
+                                {temExperiencia ? 'Tem experiência na área?? Sim.' : 'Tem experiência na área?? Não.'}
+                            </p>
+                        )}
                     </div>
+
                     <form onSubmit={handleSubmit}>
+                        {/* <h2 className="text-xl mb-4 text-center">Formulário de Cadastro</h2> */}
                         <div className="mb-4">
                             <label className="block text-gray-700">Nome</label>
                             <input
@@ -162,6 +208,7 @@ export default function Cadastro() {
                     </form>
                 </div>
             )}
+
         </div>
     );
 }

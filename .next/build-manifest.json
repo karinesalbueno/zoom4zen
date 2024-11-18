@@ -25,10 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/tvde": [
+    "/telecomunicacoes": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/tvde.js"
+      "static/chunks/pages/telecomunicacoes.js"
     ]
   },
   "ampFirstPages": []
