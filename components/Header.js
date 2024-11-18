@@ -1,19 +1,24 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import Menu from "./Menu"; 
+import Menu from "./Menu";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((prevState) => !prevState);
   };
 
   // Fechar o menu ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      // Verifica se o clique foi fora do menu ou do botão
+      if (
+        menuRef.current && !menuRef.current.contains(event.target) &&
+        buttonRef.current && !buttonRef.current.contains(event.target)
+      ) {
         setIsMenuOpen(false);
       }
     };
@@ -61,7 +66,11 @@ export default function Header() {
 
         {/* Menu responsivo (mobile) */}
         <div className="md:hidden">
-          <button className="text-gray-800" onClick={toggleMenu}>
+          <button
+            ref={buttonRef}
+            className="text-gray-800"
+            onClick={toggleMenu}
+          >
             ☰
           </button>
         </div>

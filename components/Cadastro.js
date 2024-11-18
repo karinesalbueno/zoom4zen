@@ -68,12 +68,12 @@ export default function Cadastro({ rota }) {
 
     return (
         <div className="p-6 max-w-lg mx-auto pt-14">
-            <h2 className="text-md mb-4 text-gray-700 font-medium text-center">Formulário de Cadastro</h2>
+            <h2 className="text-md mb-4 text-center">Entre em contato conosco</h2>
             {/* Botão de Voltar para a etapa anterior */}
             {etapa > 1 && <div className="mb-4 mt-6">
                 <button
                     onClick={() => setEtapa(etapa - 1)} // Volta para a etapa 1
-                    className="text-blue-500 text-base font-semibold inline-flex items-center mt-2"
+                    className="text-blue-300 text-base font-semibold inline-flex items-center mt-2"
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +151,7 @@ export default function Cadastro({ rota }) {
                     <form onSubmit={handleSubmit}>
                         {/* <h2 className="text-xl mb-4 text-center">Formulário de Cadastro</h2> */}
                         <div className="mb-4">
-                            <label className="block text-gray-700">Nome</label>
+                            <label className="block ">Nome</label>
                             <input
                                 type="text"
                                 name="nome"
@@ -162,7 +162,7 @@ export default function Cadastro({ rota }) {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Telefone</label>
+                            <label className="block ">Telefone</label>
                             <input
                                 type="number"
                                 name="telefone"
@@ -173,7 +173,7 @@ export default function Cadastro({ rota }) {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">E-mail</label>
+                            <label className="block ">E-mail</label>
                             <input
                                 type="email"
                                 name="email"
@@ -184,7 +184,7 @@ export default function Cadastro({ rota }) {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Endereço</label>
+                            <label className="block ">Endereço</label>
                             <input
                                 type="text"
                                 name="endereco"
