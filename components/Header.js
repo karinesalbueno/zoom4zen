@@ -44,7 +44,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="bg-white text-gray-800 fixed w-full top-0 left-0 z-50 shadow-md shadow-gray-400">
+    <header className="bg-white text-gray-800 fixed w-full top-0 left-0 z-50 shadow-md shadow-gray-600">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
 
         <div className="w-28 h-8">
@@ -68,7 +68,7 @@ export default function Header() {
         <div className="md:hidden">
           <button
             ref={buttonRef}
-            className="text-gray-800"
+            className="text-gray-800 text-3xl" 
             onClick={toggleMenu}
           >
             ☰

@@ -39,11 +39,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/telecomunicacoes.js"
-    ],
-    "/tvde": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/tvde.js"
     ]
   },
   "ampFirstPages": []
